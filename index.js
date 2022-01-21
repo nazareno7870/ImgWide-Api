@@ -21,4 +21,4 @@ app.use('/imgs',express.static('imgs'))
 app.use(handleErrors)
 
 
-app.listen(3001)
+app.listen(process.env.PORT ||3001)

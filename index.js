@@ -13,7 +13,7 @@ app.use(express.json())
 app.use('/api/users/',usersRouter)
 app.use('/api/posts/',postsRouter)
 app.use('/api/tags/',tagsRouter)
-app.use('/',express.static('/dist'))
+app.use('/',express.static('dist/'))
 app.use('/imgs',express.static('imgs'))
 
 

@@ -2,7 +2,17 @@ const postsRouter = require('express').Router()
 const Post = require('../models/Post')
 const User = require('../models/User')
 const Tag = require('../models/Tag')
+const multer = require('multer')
+const path = require('path')
 
+const storage = multer.diskStorage({
+    destination: 'imgs/posts',
+    filename: function (req, file, cb) {
+      cb(null, Date.now() + (Math.floor(Math.random() * 999999999)).toString()+ path.extname(file.originalname)) //Appending extension
+    }
+  })
+  
+const upload = multer({ storage: storage });
 
 postsRouter.get('/limit=:limit&skip=:skip',async(request,response)=>{
     const limit = request.params.limit
@@ -29,20 +39,22 @@ postsRouter.get('/tag',async (request,response)=>{
     response.send(tagBd)
 })
 
-postsRouter.post('/createpost',async (request,response)=>{
+postsRouter.post('/createpost',upload.single('file'),async(request,response)=>{
     try {
         const {body} = request
-        const {tags,userId, username,imgurl} = body
+        const imgSrc = request.file.filename
+        const {tags,userId, username} = body
+        const tagsArray = tags.split(',')
         const newPost = new Post({
             date: new Date().toISOString(),
-            tags,
-            imgSrc:imgurl,
+            tags:tagsArray,
+            imgSrc,
             likesId:[],
             userId,
             username
         })
 
-        tags.map(async tg=>{
+        tagsArray.map(async tg=>{
             const tagBd = await Tag.findOne({tag:tg})
 
             if(tagBd === null){
@@ -58,7 +70,7 @@ postsRouter.post('/createpost',async (request,response)=>{
         const postsUser = prevUser.posts.concat(savedPost._id)
         await User.findByIdAndUpdate(userId,{"posts":postsUser}, { new: true })
         
-        tags.map(async tg=>{
+        tagsArray.map(async tg=>{
             const tagBd = await Tag.findOne({tag:tg})
             const newPosts = tagBd.posts.concat(savedPost._id)
             await Tag.findOneAndUpdate({tag:tg},{"posts":newPosts})

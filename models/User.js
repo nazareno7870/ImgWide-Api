@@ -24,6 +24,7 @@ const userSchema = new Schema({
         ref: 'Post'
       }],
     likes: Array
+
 })
 userSchema.set('toJSON', {
     transform: function (doc, ret, options) {

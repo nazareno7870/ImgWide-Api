@@ -22,7 +22,7 @@ tagsRouter.get('/tag/:tag&limit=:limit&skip=:skip',async (request,response)=>{
     const limit = request.params.limit
     const skip = request.params.skip
     const tag = request.params.tag
-    const tagBd = await Post.find({tags:tag}).sort({date:'desc'}).limit(limit).skip(skip)
+    const tagBd = await Post.find({tags:tag}).populate('userId').sort({date:'desc'}).limit(limit).skip(skip)
     response.status(201).json(tagBd)
 })
 

@@ -2,12 +2,13 @@ const postsRouter = require('express').Router()
 const Post = require('../models/Post')
 const User = require('../models/User')
 const Tag = require('../models/Tag')
+const jwt = require('jsonwebtoken')
 
 
 postsRouter.get('/limit=:limit&skip=:skip',async(request,response)=>{
     const limit = request.params.limit
     const skip = request.params.skip
-    const posts = await Post.find({}).sort({date:'desc'}).limit(limit).skip(skip)
+    const posts = await Post.find({}).populate('userId').sort({date:'desc'}).limit(limit).skip(skip)
     response.status(201).json(posts)
 
 })
@@ -30,6 +31,20 @@ postsRouter.get('/tag',async (request,response)=>{
 })
 
 postsRouter.post('/createpost',async (request,response)=>{
+
+    const authorization = request.get('authorization')
+    let token = ''
+
+    if (authorization && authorization.toLowerCase().startsWith('bearer')) {
+        token = authorization.substring(7)
+      }
+    const decodedToken = jwt.verify(token, process.env.SECRET)
+
+    if (!token || !decodedToken.id) {
+        return response.status(401).json({ error: 'token missing or invalid' })
+      }
+
+
     try {
         const {body} = request
         const {tags,userId, username,imgurl} = body

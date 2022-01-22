@@ -18,7 +18,7 @@ usersRouter.post('/createuser', async (request, response) => {
       passwordHash,
       followers:[],
       follows:[],
-      picprof:'./imgs/profiles/profile-1.jpg',
+      picprof:'',
       posts:[],
       likes:[]
     })

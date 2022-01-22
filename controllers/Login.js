@@ -41,6 +41,7 @@ loginRouter.post('/', async (request, response) => {
       picprof: user.picprof,
       posts: user.posts,
       likes: user.likes,
+      grade: user.grade,
       token
     })
   })
@@ -75,6 +76,7 @@ loginRouter.post('/', async (request, response) => {
         picprof: user.picprof,
         posts: user.posts,
         likes: user.likes,
+        grade: user.grade,
         token
       })
     }else{

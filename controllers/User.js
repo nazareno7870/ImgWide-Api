@@ -8,6 +8,10 @@ usersRouter.post('/createuser', async (request, response) => {
     const { body } = request
     const { username, name, password} = body
 
+    if(username.length<6 || name.length<4 || password.length<8){
+      return response.status(401).json({error: 'invalid user'})
+    }
+
     const saltRounds = 10
     const passwordHash = await bcrypt.hash(password, saltRounds)
   

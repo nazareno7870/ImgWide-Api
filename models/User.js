@@ -19,6 +19,7 @@ const userSchema = new Schema({
         ref: 'User'
       }],
     picprof: String,
+    grade:String,
     posts: [{
         type: Schema.Types.ObjectId,
         ref: 'Post'

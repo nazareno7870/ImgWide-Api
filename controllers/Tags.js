@@ -26,5 +26,15 @@ tagsRouter.get('/tag/:tag&limit=:limit&skip=:skip',async (request,response)=>{
     response.status(201).json(tagBd)
 })
 
+tagsRouter.get('/search/:search&limit=:limit&skip=:skip',async (request,response)=>{
+    const limit = request.params.limit
+    const skip = request.params.skip
+    const search = request.params.search
+    var regex = new RegExp(".*" + search + ".*", "i");
+    const tagBd = await Post.find({tags:regex}).populate('userId').sort({date:'desc'}).limit(limit).skip(skip)
+    response.status(201).json(tagBd)
+})
+
+
 
 module.exports = tagsRouter

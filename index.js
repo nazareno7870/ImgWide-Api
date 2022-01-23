@@ -6,7 +6,8 @@ const handleErrors = require('./middleware/handleErrors.js');
 const postsRouter = require('./controllers/Posts');
 const tagsRouter = require('./controllers/Tags');
 const loginRouter = require('./controllers/Login');
-const likeRouter = require('./controllers/Like')
+const likeRouter = require('./controllers/Like');
+const profileRouter = require('./controllers/Profile');
 
 app.use(cors())
 app.use(express.json())
@@ -17,6 +18,7 @@ app.use('/api/posts/',postsRouter)
 app.use('/api/tags/',tagsRouter)
 app.use('/api/login/',loginRouter)
 app.use('/api/like',likeRouter)
+app.use('/api/profile',profileRouter)
 app.use('/',express.static('dist/'))
 app.use('/imgs',express.static('imgs'))
 

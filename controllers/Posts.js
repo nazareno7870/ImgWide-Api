@@ -13,6 +13,19 @@ postsRouter.get('/limit=:limit&skip=:skip',async(request,response)=>{
 
 })
 
+postsRouter.get('/post=:post',async(request,response)=>{
+    
+    try {
+        const post =  request.params.post
+        const posts = await Post.findById(post).populate('userId','username')
+        response.status(201).json(posts)
+    } catch (error) {
+        response.status(401).json({})
+    }
+
+
+})
+
 postsRouter.post('/tag',async (request,response)=>{
     const {body} = request
     const {tag} = body

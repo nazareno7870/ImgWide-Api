@@ -30,10 +30,70 @@ postsRouter.get('/tag',async (request,response)=>{
     response.send(tagBd)
 })
 
+postsRouter.delete('/deletepost',async (request,response)=>{
+
+    const authorization = request.get('authorization')
+    let token = ''
+
+    if(!authorization){
+        return response.status(401).json({ error: 'token missing or invalid' })
+    }
+
+    if (authorization && authorization.toLowerCase().startsWith('bearer')) {
+        token = authorization.substring(7)
+      }
+    const decodedToken = jwt.verify(token, process.env.SECRET)
+
+    if (!token || !decodedToken.id) {
+        return response.status(401).json({ error: 'token missing or invalid' })
+      }
+
+
+    try {
+        const {body} = request
+        const {userId,postId} = body
+
+        if(decodedToken.id === userId){
+            await Post.findByIdAndRemove(postId)
+
+            const oldUser = await User.findById(userId)
+
+            let newPosts = oldUser.posts
+
+            const index = newPosts.indexOf(postId)
+
+            if(index>=0){
+                let arr1 = newPosts.slice(0,index)
+                let arr2 = newPosts.slice(index+1,)
+    
+                newPosts = arr1.concat(arr2)
+            }else{
+                newPosts.push(id)
+            }
+            
+            await User.findByIdAndUpdate(userId,{posts:newPosts})
+
+        }
+       
+
+        response.status(201).json('Post Eliminado')
+
+    } catch (error) {
+        response.status(401).json("No se pudo eliminar el post")
+    }
+ 
+})
+
+
+
 postsRouter.post('/createpost',async (request,response)=>{
 
     const authorization = request.get('authorization')
     let token = ''
+
+    if(!authorization){
+        return response.status(401).json({ error: 'token missing or invalid' })
+    }
 
     if (authorization && authorization.toLowerCase().startsWith('bearer')) {
         token = authorization.substring(7)

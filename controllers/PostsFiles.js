@@ -15,28 +15,46 @@ const storage = multer.diskStorage({
 const upload = multer({ storage: storage });
 
 postsRouter.get('/limit=:limit&skip=:skip',async(request,response)=>{
-    const limit = request.params.limit
-    const skip = request.params.skip
-    const posts = await Post.find({}).sort({date:'desc'}).limit(limit).skip(skip)
-    response.status(201).json(posts)
+    try {
+        const limit = request.params.limit
+        const skip = request.params.skip
+        const posts = await Post.find({}).sort({date:'desc'}).limit(limit).skip(skip)
+        response.status(201).json(posts)
+    
+    } catch (error) {
+        response.status(401).json({})
+
+    }
 
 })
 
 postsRouter.post('/tag',async (request,response)=>{
-    const {body} = request
-    const {tag} = body
-    const newTag = new Tag({
-        tag
-    })
-    const NewTag = await newTag.save()
-    response.status(201).json(NewTag)
+    try {
+        const {body} = request
+        const {tag} = body
+        const newTag = new Tag({
+            tag
+        })
+        const NewTag = await newTag.save()
+        response.status(201).json(NewTag)
+    } catch (error) {
+        response.status(401).json({})
+
+    }
+
 
 })
 
 postsRouter.get('/tag',async (request,response)=>{
-    const tagBd = await Tag.findOne({tag:'asda'})
-    console.log(tagBd)
-    response.send(tagBd)
+    try {
+        const tagBd = await Tag.findOne({tag:'asda'})
+        console.log(tagBd)
+        response.send(tagBd)
+    } catch (error) {
+        response.status(401).json({})
+
+    }
+
 })
 
 postsRouter.post('/createpost',upload.single('file'),async(request,response)=>{

@@ -8,7 +8,10 @@ const userSchema = new Schema({
         unique:true,
         required:true,
     },
-    name: String,
+    name: {
+      type: String,
+      default: ''
+    },
     passwordHash: String,
     followers: [{
         type: Schema.Types.ObjectId,
@@ -24,7 +27,14 @@ const userSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: 'Post'
       }],
-    likes: Array
+    likes: Array,
+    email: {
+      type: String
+    },
+    confirmed: {
+      type: Boolean,
+      default: false
+    }
 
 })
 userSchema.set('toJSON', {

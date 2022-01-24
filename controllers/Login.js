@@ -43,6 +43,7 @@ loginRouter.post('/', async (request, response) => {
       posts: user.posts,
       likes: user.likes,
       grade: user.grade,
+      confirmed: user.confirmed,
       token
     })
   } catch (error) {
@@ -84,6 +85,7 @@ loginRouter.post('/', async (request, response) => {
           posts: user.posts,
           likes: user.likes,
           grade: user.grade,
+          confirmed: user.confirmed,
           token
         })
       }else{

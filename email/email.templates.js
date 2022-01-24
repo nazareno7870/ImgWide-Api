@@ -15,6 +15,16 @@ module.exports = {
       </a>
     `,      
     text: `Copy and paste this link: ${CLIENT_ORIGIN}/confirm/${id}`
+  }),
+
+  reset: (idUnico) => ({
+    subject: 'Imgwide Confirm Email',
+    html: `
+      <a href='${CLIENT_ORIGIN}/reset/${idUnico}'>
+        Click to confirm email and username
+      </a>
+    `,      
+    text: `Copy and paste this link: ${CLIENT_ORIGIN}/reset/${idUnico}`
   })
   
 }

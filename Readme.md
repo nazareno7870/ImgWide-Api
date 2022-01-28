@@ -45,6 +45,9 @@ The application has the following functionalities:
 ### Links
 
 - Live Site URL: [https://imgwide.netlify.app/](https://imgwide.netlify.app/)
+- Api repository: [https://github.com/nazareno7870/ImgWide-Api](https://github.com/nazareno7870/ImgWide-Api)
+- App repository: [https://github.com/nazareno7870/Imgwide-App](https://github.com/nazareno7870/Imgwide-App)
+
 
 ## My process
 

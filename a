@@ -1,0 +1,25 @@
+* [33ma4f9f4b[m[33m ([m[1;31morigin/main[m[33m, [m[1;31mheroku/main[m[33m)[m Added Readme.md
+* [33m47f8238[m[33m ([m[1;36mHEAD -> [m[1;32mmain[m[33m)[m Added Readme.md
+* [33mef22c10[m Added Readme.md
+* [33m3520114[m Added Email Confirm
+* [33mbe66600[m Added Email Confirm
+* [33mdc377fb[m Handle Errors update
+* [33mdbcc88f[m Added one Post query
+* [33m0dff4bd[m Added Delete Post
+* [33m0a8c344[m Added search pics
+* [33m5949669[m Added Liked Function
+* [33mb35c31a[m Added function to detect if the registration fields are ok
+* [33m505f074[m Added field grade in User
+* [33m34377be[m Change auth for Create User
+* [33mf86f687[m Added login for token
+* [33m76fb183[m deploy 22/1/22
+* [33m16d3bab[m deploy
+* [33m29bba64[m deploy
+* [33m03af03b[m deploy
+* [33m7522344[m Added port env for Heroku
+* [33mdc24a50[m Deploymen Test
+* [33mcd28244[m Added Dist
+* [33mcedbb84[m Change Package.json
+* [33mfbecdea[m Added Api Tags and init product
+* [33m2c11eb2[m Added Controllers, HandleErrors and Models for MongoDB
+* [33ma5d7d20[m Started Api for Imgwide

@@ -14,10 +14,6 @@ usersRouter.post('/createuser', async (request, response) => {
 
     const verUser = await User.findOne({email})
 
-    if(verUser.email){
-    return response.status(401).json({error: 'Email already used'})
-
-    }
         
     if(username.length<6 || password.length<8){
       return response.status(401).json({error: 'invalid user'})

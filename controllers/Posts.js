@@ -9,7 +9,7 @@ postsRouter.get('/limit=:limit&skip=:skip',async(request,response)=>{
     try {
         const limit = request.params.limit
         const skip = request.params.skip
-        const posts = await Post.find({}).populate('userId').sort({date:'desc'}).limit(limit).skip(skip)
+        const posts = await Post.find({}).populate('userId','username').sort({date:'desc'}).limit(limit).skip(skip)
         response.status(201).json(posts)
     } catch (error) {
         response.status(401).json({})

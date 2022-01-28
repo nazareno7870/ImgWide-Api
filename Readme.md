@@ -13,7 +13,6 @@ This is my personal project to apply my knowledge acquired in the last time.
   - [Front End](#front-end)
   - [Back End](#back-end)
 - [Author](#author)
-- [Acknowledgments](#acknowledgments)
 
 
 ## Overview
